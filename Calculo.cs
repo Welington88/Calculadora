@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Calculadora
@@ -19,17 +18,12 @@ namespace Calculadora
             return Task.Run(() => list);
         }
 
-        public async void imprimirNumeros()
+        public async Task<int> receberNumero()
         {
             var list = await listaNumeros();
-            var listaFinal = list.Where(list => list <= 10).OrderBy(list => list).Distinct();
-            Thread.Sleep(5000);
-            foreach (var l in listaFinal)
-            {
-                Console.WriteLine(l.ToString(), ConsoleColor.Blue);
-            }
-            Console.WriteLine("--------------------------------------------------", ConsoleColor.Green);
-            Console.WriteLine("Terminei o Trabalho", ConsoleColor.Red);
+            var resultado = list.Where(list => list <= 10).OrderBy(list => list).Distinct().Sum();
+            //Thread.Sleep(5000);
+            return resultado;
         }
     }
 }
